@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+    <link rel="stylesheet" href="/src/index.css">
+    <link rel="icon" href="./77QRa.png" type="image/x-icon" />
+    <title>QR Code Generator</title>
+</head>
+<body>
+
+    <div class="grid">
+        <h2 align="center">QR Code Generator</h2>
+        <center>
+            <div id="qrcode"></div> <!-- Where the QR code will be generated -->
+        </center>
+
+        <select id="size">
+            <option value="100">100x100</option>
+            <option value="150">150x150</option>
+            <option value="200">200x200</option>
+            <option value="250" selected>250x250</option>
+            <option value="300">300x300</option>
+            <option value="400">400x400</option>
+        </select>
+        <br><br>
+
+        <textarea placeholder="Enter Your Text" id="qrtext"></textarea>
+        <br><br>
+
+        <input type="submit" value="Generate" onclick="genQR()">
+        <button id="dwnldbtn" onclick="downloadImg()">Download</button>
+        <br><br>
+
+        <p>Developed By <b>Ajanur Rahman</b></p>
+    </div>
+
+    <script>
+        function genQR() {
+            var mytext = document.getElementById("qrtext").value;
+            var mysize = document.getElementById("size").value;
+
+            if (mytext !== "") {
+                // Clear previous QR code
+                document.getElementById("qrcode").innerHTML = '';
+
+                // Create a new QR code
+                var qrcode = new QRCode(document.getElementById("qrcode"), {
+                    text: mytext,
+                    width: parseInt(mysize),  // Size from the dropdown
+                    height: parseInt(mysize),
+                    correctLevel: QRCode.CorrectLevel.H
+                });
+            } else {
+                alert("Please Enter Text");
+            }
+        }
+
+        function downloadImg() {
+            var qrcodeDiv = document.getElementById("qrcode");
+
+            if (qrcodeDiv.innerHTML) {
+                var canvas = qrcodeDiv.getElementsByTagName("canvas")[0];
+                var imgURL = canvas.toDataURL("image/png");
+
+                var el = document.createElement("a");
+                el.setAttribute("href", imgURL);
+                el.setAttribute("download", "qrcode.png"); // Set a default filename
+                document.body.appendChild(el);
+                el.click();
+                document.body.removeChild(el);
+            } else {
+                alert("No QR Code generated yet!");
+            }
+        }
+    </script>
+
+</body>
+</html>
