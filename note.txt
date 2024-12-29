@@ -1,6 +1,0 @@
-URL: https://chart.googleapis.com"chart?
-
-var name =prompt("whats your name");
-         var full = "Hello " + name + " how are you";
-
-          console.log(full);
