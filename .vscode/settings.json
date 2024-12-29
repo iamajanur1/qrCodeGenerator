@@ -1,7 +1,0 @@
-{
-    "editor.bracketPairColorization.independentColorPoolPerBracketType": true,
-    "editor.bracketPairColorization.enabled": false,
-    "editor.acceptSuggestionOnEnter": "on",
-    "editor.snippetSuggestions": "none",
-    "editor.suggest.filterGraceful": true
-}
